@@ -1,10 +1,17 @@
 package rs.fon.pp.dodatna.bioskop;
 
-public class Sala {
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class Sala implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String naziv;
 	int sifra;
-	int brojSedista;
+	int [] sedista; //ovde sam promenila u niz, tako mi je bilo na kraju logicnije, kad sam pocela da razmisljam o metodama, aaa, recite ako ne valja -.-
 	int brojRedova;
 	
 	public String getNaziv() {
@@ -23,29 +30,36 @@ public class Sala {
 			throw new RuntimeException("Šifra predstavlja pozitivan broj");
 		this.sifra = sifra;
 	}
-	public int getBrojSedista() {
-		return brojSedista;
+	
+	public int[] getSedista() {
+		return sedista;
 	}
-	public void setBrojSedista(int brojSedista) {
-		if(brojSedista < 1)
-			throw new RuntimeException("Broj sedišta mora biti pozitivan broj.");
-		this.brojSedista = brojSedista;
+	public void setSedista(int brojSedista) {
+		if(brojSedista < 0)
+			throw new RuntimeException("Broj sedišta u sali je pozivan broj.");
+		int[] s = new int[brojSedista];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = i;
+		}
+		this.sedista = s;
 	}
 	public int getBrojRedova() {
 		return brojRedova;
 	}
+	//za sad sam stavila ovako, jer cemo ipak najverovatnije ostaviti da sala moze da bude samo pravougaona
 	public void setBrojRedova(int brojRedova) {
-		if(brojRedova < 1)
-			throw new RuntimeException("Broj redova mora biti pozitivan broj.");
+		if(brojRedova < 1 || sedista.length % brojRedova == 0)
+			throw new RuntimeException("Broj redova mora biti pozitivan broj i broj koji deli broj sedišta.");
 		this.brojRedova = brojRedova;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + brojRedova;
-		result = prime * result + brojSedista;
 		result = prime * result + ((naziv == null) ? 0 : naziv.hashCode());
+		result = prime * result + Arrays.hashCode(sedista);
 		result = prime * result + sifra;
 		return result;
 	}
@@ -66,7 +80,7 @@ public class Sala {
 	}
 	@Override
 	public String toString() {
-		return "Naziv sale: " + naziv + ", njena šifra je: " + sifra + ", a broj sedišta je: " + brojSedista;  
+		return "Naziv sale: " + naziv + ", njena šifra je: " + sifra + ", a broj sedišta je: " + sedista.length;  
 	}
 	
 	

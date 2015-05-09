@@ -1,17 +1,22 @@
 package rs.fon.pp.dodatna.bioskop;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
-public class Projekcija {
+public class Projekcija implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Film film;
 	GregorianCalendar DatumIVremePrikazivanja;
 	Sala sala;
 	boolean daLiJe3D;
 	double cena;
-	boolean[] sedista;
+	boolean[] sedista; //e ljudi, ovde sam zastala, u trenutku sam shvatila kako nam ovo povezano sa int brojevima sedista i sad sam zbunjena
 	LinkedList<Kupac> kupci;
 	
 	public Film getFilm() {
@@ -71,8 +76,10 @@ public class Projekcija {
 		return sedista;
 	}
 
-	public void setSedista(boolean[] sedista) {
-		this.sedista = sedista;
+	public void setSedista(int brojSedista) {
+		if(brojSedista < 0)
+			throw new RuntimeException("Broj sedišta ne može biti nula.");
+		this.sedista = new boolean[brojSedista];
 	}
 
 	@Override

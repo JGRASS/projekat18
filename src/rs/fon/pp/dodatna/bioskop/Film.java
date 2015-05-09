@@ -1,9 +1,14 @@
 package rs.fon.pp.dodatna.bioskop;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class Film {
+public class Film implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String naziv, zanr;
 	int vremeTrajanja;
 	GregorianCalendar datumPocetka, datumZavrsetka;
