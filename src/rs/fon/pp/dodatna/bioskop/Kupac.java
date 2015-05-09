@@ -10,7 +10,7 @@ public class Kupac implements Serializable{
 	private static final long serialVersionUID = 1L;
 	String ime;
 	int brojKarata; 
-	//int [] brojSedista; ja sam ovo kao napravila, umesto brojSedista(zbog te mogucnosti grupe), ali mislim da su nam potrebni samo ova dva atributa,
+	int [] brojSedista;// ja sam ovo kao napravila, umesto brojSedista(zbog te mogucnosti grupe), ali mislim da su nam potrebni samo ova dva atributa,
 	//a nikakav broj sedita, jer to cemo u metodi kada rezervisemo karte
 	
 	public String getIme() {
@@ -31,7 +31,16 @@ public class Kupac implements Serializable{
 		this.brojKarata = brojKarata;
 	} 
 
-
+	public int[] getBrojSedista() {
+		return brojSedista;
+	}
+	public void setBrojSedista(int[] brojSedista) {
+		for (int i = 0; i < brojSedista.length; i++) {
+			if(brojSedista[i] < 0)
+			throw new RuntimeException("Broj sedišta u sali je pozivan broj.");
+		}
+		this.brojSedista = brojSedista;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

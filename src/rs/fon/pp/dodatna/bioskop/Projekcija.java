@@ -11,14 +11,25 @@ public class Projekcija implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int sifra;
 	Film film;
 	GregorianCalendar DatumIVremePrikazivanja;
 	Sala sala;
 	boolean daLiJe3D;
 	double cena;
 	boolean[] sedista; //e ljudi, ovde sam zastala, u trenutku sam shvatila kako nam ovo povezano sa int brojevima sedista i sad sam zbunjena
-	LinkedList<Kupac> kupci;
+	LinkedList<Kupac> kupci = new LinkedList<Kupac>();
 	
+	public int getSifra() {
+		return sifra;
+	}
+
+	public void setSifra(int sifra) {
+		if(sifra < 0)
+			throw new RuntimeException("Šifra mora biti pozitivan broj.");
+		this.sifra = sifra;
+	}
+
 	public Film getFilm() {
 		return film;
 	}
@@ -82,6 +93,14 @@ public class Projekcija implements Serializable{
 		this.sedista = new boolean[brojSedista];
 	}
 
+	public LinkedList<Kupac> getKupci() {
+		return kupci;
+	}
+
+	public void setKupci(LinkedList<Kupac> kupci) {
+		this.kupci = kupci;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,9 +129,7 @@ public class Projekcija implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Projekcija p = (Projekcija) obj;
-		if(DatumIVremePrikazivanja.get(GregorianCalendar.HOUR) == p.getDatumPrikazivanja().get(GregorianCalendar.HOUR)
-				&& DatumIVremePrikazivanja.get(GregorianCalendar.MINUTE) == p.getDatumPrikazivanja().get(GregorianCalendar.MINUTE)
-				&& sala.getSifra() == p.getSala().getSifra())
+		if(sifra == p.getSifra())
 			return true;
 		else
 			return false;
@@ -121,7 +138,7 @@ public class Projekcija implements Serializable{
 	@Override
 	public String toString() {
 		//ovo moze da se jos dopise, ali videcemo tek kad dodamo i metode za izracunavanje broja kupljenih karata ili nes tako
-		return "Tražena projekcija ima sledeće podatke - " + "\nFilm - " + film.toString() +
+		return "Tražena projekcija ima sledeće podatke - " + " Šifra: " + sifra + "\nFilm - " + film.toString() +
 				"\nDatum i vreme prikazivanja: " + DatumIVremePrikazivanja.getTime() +
 				"\nSala - " + sala.getNaziv();
 	}
