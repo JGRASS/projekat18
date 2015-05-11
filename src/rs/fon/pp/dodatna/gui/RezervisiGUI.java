@@ -15,6 +15,7 @@ import rs.fon.pp.dodatna.bioskop.Projekcija;
 
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import javax.swing.ImageIcon;
 
 public class RezervisiGUI extends JFrame {
 
@@ -61,6 +62,7 @@ public class RezervisiGUI extends JFrame {
 	private JLabel getLblImeKupca() {
 		if (lblImeKupca == null) {
 			lblImeKupca = new JLabel("Ime kupca");
+			lblImeKupca.setIcon(new ImageIcon(RezervisiGUI.class.getResource("/Icons/slike/Close-2-icon.png")));
 			lblImeKupca.setBounds(23, 29, 80, 16);
 		}
 		return lblImeKupca;
@@ -179,5 +181,15 @@ public class RezervisiGUI extends JFrame {
 		int godina = Integer.parseInt(g);
 		GregorianCalendar datum = new GregorianCalendar(dan, mesec, godina);
 		return datum;
+	}
+	
+	protected Projekcija vratiIzabranuProjekciju(LinkedList<Projekcija> projekcije) {
+		Projekcija izabranaP = new Projekcija();
+		String izabrana = (String) comboBox.getSelectedItem();
+		for (int i = 0; i < projekcije.size(); i++) {
+			if(izabrana.indexOf(projekcije.get(i).toString()) != -1)
+				izabranaP = projekcije.get(i);
+		}
+		return izabranaP;
 	}
 }

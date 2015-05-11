@@ -1,11 +1,6 @@
 package rs.fon.pp.dodatna.bioskop;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 

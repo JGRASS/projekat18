@@ -13,6 +13,7 @@ public class Sala implements Serializable{
 	int sifra;
 	int [] sedista; //ovde sam promenila u niz, tako mi je bilo na kraju logicnije, kad sam pocela da razmisljam o metodama, aaa, recite ako ne valja -.-
 	int brojRedova;
+	int brojKolona;
 	
 	public String getNaziv() {
 		return naziv;
@@ -53,11 +54,20 @@ public class Sala implements Serializable{
 		this.brojRedova = brojRedova;
 	}
 	
+	public int getBrojKolona() {
+		return brojKolona;
+	}
+	public void setBrojKolona(int brojKolona) {
+		if(brojKolona <= 0)
+			throw new RuntimeException("Broj kolona u sali je pozitivan broj");
+		this.brojKolona = brojKolona;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + brojRedova;
+		result = prime * result + brojKolona;
 		result = prime * result + ((naziv == null) ? 0 : naziv.hashCode());
 		result = prime * result + Arrays.hashCode(sedista);
 		result = prime * result + sifra;

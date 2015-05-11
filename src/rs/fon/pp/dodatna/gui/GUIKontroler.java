@@ -44,7 +44,12 @@ public class GUIKontroler {
 		prozor.izlistajProjekcije(bioskop.pronadjiProjekcijeFilmDatum(prozor.vratiFilm(), prozor.vratiDatum()));
 	}
 	
-	
+	public static void prikaziIzaberiSedisteGUI(RezervisiGUI prozor, LinkedList<Projekcija> projekcije, Projekcija projekcija) {
+		IzaberiSedisteGUI izaberiProzor = new IzaberiSedisteGUI(prozor, projekcije, prozor.vratiIzabranuProjekciju(projekcije));
+		izaberiProzor.setLocationRelativeTo(glavniProzor.getContentPane());
+		izaberiProzor.setVisible(true);
+		izaberiProzor.prikaziSalu(projekcija.getSala().getBrojRedova(), projekcija.getSala().getBrojKolona());
+	}
 	
 	public static void ucitajIzFajla() {
 		try {
