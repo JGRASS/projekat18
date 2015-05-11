@@ -6,13 +6,36 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JList;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JButton;
 
+import rs.fon.pp.dodatna.bioskop.Projekcija;
 import rs.fon.pp.dodatna.bioskop.Raspored;
 import rs.fon.pp.dodatna.bioskop.RasporedInterface;
+
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+
+import java.awt.Panel;
+
+import javax.swing.SwingConstants;
+
+import java.awt.Label;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Button;
+import java.util.LinkedList;
 
 public class BioskopGUI extends JFrame {
 
@@ -22,8 +45,16 @@ public class BioskopGUI extends JFrame {
 	private JMenuItem mntmDodajNoviFilm;
 	private JMenuItem mntmDodajizmeniSalu;
 	private JMenuItem mntmDodajProjekciju;
+	private JScrollPane scrollPane;
+	private JButton btnDodajNoviFilm;
+	private JButton btnDodajProjekciju;
 	private JButton btnNewButton;
-	private JButton btnPrkaiRasporedProjekcija;
+	private JMenu mnDatotek;
+	private JMenuItem mntmSauvaj;
+	private JMenuItem mntmOtvori;
+	private JButton btnSauvajSvePromene;
+	private JTextArea textArea;
+	private JList list;
 
 
 	/**
@@ -33,20 +64,26 @@ public class BioskopGUI extends JFrame {
 		createContents();
 	}
 	private void createContents() {
+		setForeground(Color.WHITE);
+		setBackground(Color.WHITE);
 		setTitle("Rezervacija bioskopskih karata");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 485, 343);
+		setBounds(100, 100, 763, 494);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getScrollPane());
+		contentPane.add(getBtnDodajNoviFilm());
+		contentPane.add(getBtnDodajProjekciju());
 		contentPane.add(getBtnNewButton());
-		contentPane.add(getBtnPrkaiRasporedProjekcija());
+		contentPane.add(getBtnSauvajSvePromene());
 	}
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
+			menuBar.add(getMnDatotek());
 			menuBar.add(getMnNewMenu());
 		}
 		return menuBar;
@@ -78,18 +115,86 @@ public class BioskopGUI extends JFrame {
 		}
 		return mntmDodajProjekciju;
 	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setBounds(12, 115, 614, 180);
+			scrollPane.setViewportView(getTextArea_1());
+		}
+		return scrollPane;
+	}
+	private JButton getBtnDodajNoviFilm() {
+		if (btnDodajNoviFilm == null) {
+			btnDodajNoviFilm = new JButton("Dodaj novi film");
+			btnDodajNoviFilm.setBounds(12, 13, 130, 25);
+		}
+		return btnDodajNoviFilm;
+	}
+	private JButton getBtnDodajProjekciju() {
+		if (btnDodajProjekciju == null) {
+			btnDodajProjekciju = new JButton("Dodaj projekciju");
+			btnDodajProjekciju.setBounds(12, 50, 130, 25);
+		}
+		return btnDodajProjekciju;
+	}
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
-			btnNewButton = new JButton("Rezervi\u0161i");
-			btnNewButton.setBounds(24, 13, 97, 25);
+			btnNewButton = new JButton("Rezervi\u0161i kartu");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
+			btnNewButton.setBounds(229, 13, 272, 54);
 		}
 		return btnNewButton;
 	}
-	private JButton getBtnPrkaiRasporedProjekcija() {
-		if (btnPrkaiRasporedProjekcija == null) {
-			btnPrkaiRasporedProjekcija = new JButton("Prika\u017Ei raspored projekcija za odre\u0111eni dan");
-			btnPrkaiRasporedProjekcija.setBounds(146, 13, 281, 25);
+	private JMenu getMnDatotek() {
+		if (mnDatotek == null) {
+			mnDatotek = new JMenu("Datoteka");
+			mnDatotek.add(getMntmSauvaj());
+			mnDatotek.add(getMntmOtvori());
 		}
-		return btnPrkaiRasporedProjekcija;
+		return mnDatotek;
+	}
+	private JMenuItem getMntmSauvaj() {
+		if (mntmSauvaj == null) {
+			mntmSauvaj = new JMenuItem("Sa\u010Duvaj");
+		}
+		return mntmSauvaj;
+	}
+	private JMenuItem getMntmOtvori() {
+		if (mntmOtvori == null) {
+			mntmOtvori = new JMenuItem(" Prika\u017Ei raspored projekcija");
+			mntmOtvori.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+				}
+			});
+		}
+		return mntmOtvori;
+	}
+	private JButton getBtnSauvajSvePromene() {
+		if (btnSauvajSvePromene == null) {
+			btnSauvajSvePromene = new JButton("Sa\u010Duvaj sve promene");
+			btnSauvajSvePromene.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.sacuvajUFajl();
+					textArea.setText("Podaci su uspešno sačuvani!");
+				}
+			});
+			btnSauvajSvePromene.setBounds(12, 339, 213, 54);
+		}
+		return btnSauvajSvePromene;
+	}
+	private JTextArea getTextArea_1() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+		}
+		return textArea;
+	}
+	
+	protected void prikaziSveProjekcije(LinkedList<Projekcija> projekcije) {
+		list.setListData(projekcije.toArray());
+
 	}
 }

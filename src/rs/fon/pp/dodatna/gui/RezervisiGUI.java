@@ -38,6 +38,7 @@ public class RezervisiGUI extends JFrame {
 	 */
 	
 	public RezervisiGUI(BioskopGUI glavniProzor, LinkedList<Projekcija> projekcije) {
+		setTitle("Rezervi\u0161i");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -118,11 +119,6 @@ public class RezervisiGUI extends JFrame {
 	private JComboBox getComboBox_1() {
 		if (comboBox_1 == null) {
 			comboBox_1 = new JComboBox();
-			
-		for (int i = 0; i < projekcije.size(); i++) {
-			//if(comboBox_1. treba proveriti da li sadrzi
-			comboBox_1.addItem(projekcije.get(i).getFilm().getNaziv());
-		}
 		comboBox_1.setBounds(320, 26, 80, 22);
 		}
 		return comboBox_1;
@@ -145,9 +141,43 @@ public class RezervisiGUI extends JFrame {
 	private JLabel getLblDatum() {
 		if (lblDatum == null) {
 			lblDatum = new JLabel("Datum");
-			lblDatum.setBounds(265, 72, 48, 16);
+			lblDatum.setBounds(274, 72, 48, 16);
 		}
 		return lblDatum;
 	}
-
+	
+	protected void izlistajFilmove(LinkedList<String> filmovi) {
+		for (int i = 0; i < filmovi.size(); i++) {
+			comboBox_1.addItem(filmovi.get(i));
+		}
+	}
+	
+	protected void izlistajDatume(LinkedList<String> datumi) {
+		for (int i = 0; i < datumi.size(); i++) {
+			comboBox_2.addItem(datumi.get(i));
+		}
+	}
+	
+	protected void izlistajProjekcije(LinkedList<Projekcija> izabrane) {
+		for (int i = 0; i < izabrane.size(); i++) {
+			comboBox.addItem(izabrane.toString());
+		}
+	}
+	
+	protected String vratiFilm() {
+		String s = (String) comboBox_1.getSelectedItem();
+		return s;
+	}
+	
+	protected GregorianCalendar vratiDatum() {
+		String s = (String) comboBox_2.getSelectedItem();
+		String d = s.split("/")[0];
+		int dan = Integer.parseInt(d);
+		String m = s.split("/")[1];
+		int mesec = Integer.parseInt(m);
+		String g = s.split("/")[2];
+		int godina = Integer.parseInt(g);
+		GregorianCalendar datum = new GregorianCalendar(dan, mesec, godina);
+		return datum;
+	}
 }
