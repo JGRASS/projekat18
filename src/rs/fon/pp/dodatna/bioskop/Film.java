@@ -13,6 +13,19 @@ public class Film implements Serializable{
 	int vremeTrajanja;
 	GregorianCalendar datumPocetka, datumZavrsetka;
 	
+/*	
+ * vidm ima metoda dodajFilm al tek na kraju
+ * Film (String naziv, String zanr, int vremeTrajanja, int danP, int mesecP, int godinaP
+			, int danZ, int mesecZ, int godinaZ){
+		setNaziv(naziv);
+		setZanr(zanr);
+		setVremeTrajanja(vremeTrajanja);
+		setDatumPocetka(godinaP, mesecP, danP);
+		setDatumZavrsetka(godinaZ, mesecZ, danZ);
+		
+		
+	}*/
+	
 	public String getNaziv() {
 		return naziv;
 	}
@@ -55,8 +68,8 @@ public class Film implements Serializable{
 		if(godina < 2015 || mesec < 0 || mesec > 12 || dan < 1 || dan > 31)
 			throw new RuntimeException("Pogrešno uneti godina, mesec ili dan, pokušajte ponovo.");
 		GregorianCalendar datum = new GregorianCalendar(godina, mesec - 1, dan);
-		if(datumZavrsetka.before(getDatumPocetka()))
-			throw new RuntimeException("Datum završetka prikazivanja mora biti posle datum početka prikazivanja filma.");
+		//if(datumZavrsetka.before(getDatumPocetka()))
+		//	throw new RuntimeException("Datum završetka prikazivanja mora biti posle datum početka prikazivanja filma.");
 		this.datumZavrsetka = datum;
 	}
 	@Override

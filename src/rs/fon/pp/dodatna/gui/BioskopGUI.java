@@ -126,6 +126,10 @@ public class BioskopGUI extends JFrame {
 	private JButton getBtnDodajNoviFilm() {
 		if (btnDodajNoviFilm == null) {
 			btnDodajNoviFilm = new JButton("Dodaj novi film");
+			btnDodajNoviFilm.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			btnDodajNoviFilm.setBounds(12, 13, 130, 25);
 		}
 		return btnDodajNoviFilm;
@@ -133,6 +137,11 @@ public class BioskopGUI extends JFrame {
 	private JButton getBtnDodajProjekciju() {
 		if (btnDodajProjekciju == null) {
 			btnDodajProjekciju = new JButton("Dodaj projekciju");
+			btnDodajProjekciju.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
 			btnDodajProjekciju.setBounds(12, 50, 130, 25);
 		}
 		return btnDodajProjekciju;
@@ -142,6 +151,7 @@ public class BioskopGUI extends JFrame {
 			btnNewButton = new JButton("Rezervi\u0161i kartu");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+		//			GUIKontroler.prikaziRezervisiGUI(this, projekcije);
 				}
 			});
 			btnNewButton.setBounds(229, 13, 272, 54);
@@ -178,8 +188,10 @@ public class BioskopGUI extends JFrame {
 			btnSauvajSvePromene = new JButton("Sa\u010Duvaj sve promene");
 			btnSauvajSvePromene.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GUIKontroler.sacuvajUFajl();
+					
+					if (GUIKontroler.sacuvajUFajl()){
 					textArea.setText("Podaci su uspešno sačuvani!");
+					}
 				}
 			});
 			btnSauvajSvePromene.setBounds(12, 339, 213, 54);

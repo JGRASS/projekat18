@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import rs.fon.pp.dodatna.bioskop.Projekcija;
 import rs.fon.pp.dodatna.bioskop.Raspored;
 import rs.fon.pp.dodatna.bioskop.RasporedInterface;
+import javax.swing.JFrame;
 
 
 public class GUIKontroler {
@@ -51,6 +52,10 @@ public class GUIKontroler {
 		izaberiProzor.prikaziSalu(projekcija.getSala().getBrojRedova(), projekcija.getSala().getBrojKolona());
 	}
 	
+	//public static void prikazi
+	
+	
+	
 	public static void ucitajIzFajla() {
 		try {
 			JFileChooser fc = new JFileChooser();
@@ -67,19 +72,22 @@ public class GUIKontroler {
 		}
 	}
 	
-	public static void sacuvajUFajl() {
+	public static boolean sacuvajUFajl() {
 		try {
 			JFileChooser fc = new JFileChooser();
 			int returnVal = fc.showSaveDialog(glavniProzor.getContentPane());
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-
 				bioskop.sacuvajUFajl(file.getAbsolutePath());
+				return true;		
 			}
+			
+			return false;
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e1.getMessage(),
 					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
+		return false;
 	}
 }

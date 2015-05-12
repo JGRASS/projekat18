@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JToggleButton;
 
 import rs.fon.pp.dodatna.bioskop.Projekcija;
+import rs.fon.pp.dodatna.bioskop.Raspored;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,8 @@ public class IzaberiSedisteGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+		
+	
 	public IzaberiSedisteGUI(RezervisiGUI prozor, LinkedList<Projekcija> projekcije, Projekcija projekcija) {
 		createContents();
 	}
@@ -46,8 +49,11 @@ public class IzaberiSedisteGUI extends JFrame {
 		}
 		return panel;
 	}
+
 	
 	public void prikaziSalu (int redovi, int kolone) {
+		kolone = 5;
+		redovi = 4;
 		panel.setLayout(new GridLayout(kolone, redovi));
 		 for (int red = 0; red < redovi; redovi++) {
 	            for (int kolona = 0; kolona < kolone; kolone++) {

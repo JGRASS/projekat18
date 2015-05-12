@@ -32,7 +32,7 @@ public class RezervisiGUI extends JFrame {
 	private JComboBox<String> comboBox_2;
 	private JLabel lblDatum;
 	private LinkedList<Projekcija> projekcije; //iskreno nemam pojma da li ovo moze ovako, ali kao ako je mogla valuta u menjacnici, moze i ovo?
-
+	private BioskopGUI glavniProzor;
 
 	/**
 	 * Create the frame.
@@ -57,6 +57,7 @@ public class RezervisiGUI extends JFrame {
 		contentPane.add(getComboBox_2());
 		contentPane.add(getLblDatum());
 		this.projekcije = projekcije;
+		this.glavniProzor = glavniProzor;
 		
 	}
 	private JLabel getLblImeKupca() {

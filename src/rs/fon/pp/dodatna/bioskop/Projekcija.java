@@ -17,8 +17,9 @@ public class Projekcija implements Serializable{
 	Sala sala;
 	boolean daLiJe3D;
 	double cena;
-	boolean[] sedista; //e ljudi, ovde sam zastala, u trenutku sam shvatila kako nam ovo povezano sa int brojevima sedista i sad sam zbunjena
+	//boolean[] sedista; //e ljudi, ovde sam zastala, u trenutku sam shvatila kako nam ovo povezano sa int brojevima sedista i sad sam zbunjena
 	LinkedList<Kupac> kupci = new LinkedList<Kupac>();
+	// ne kontam bas sta su nam ovi kupci odje
 	
 	public int getSifra() {
 		return sifra;
@@ -83,7 +84,7 @@ public class Projekcija implements Serializable{
 		this.cena = cena;
 	}
 
-	public boolean[] getSedista() {
+/*	public boolean[] getSedista() {
 		return sedista;
 	}
 
@@ -91,7 +92,7 @@ public class Projekcija implements Serializable{
 		if(brojSedista < 0)
 			throw new RuntimeException("Broj sedišta ne može biti nula.");
 		this.sedista = new boolean[brojSedista];
-	}
+	}*/
 
 	public LinkedList<Kupac> getKupci() {
 		return kupci;
@@ -116,7 +117,7 @@ public class Projekcija implements Serializable{
 		result = prime * result + ((film == null) ? 0 : film.hashCode());
 		result = prime * result + ((kupci == null) ? 0 : kupci.hashCode());
 		result = prime * result + ((sala == null) ? 0 : sala.hashCode());
-		result = prime * result + Arrays.hashCode(sedista);
+	//	result = prime * result + Arrays.hashCode(sedista);
 		return result;
 	}
 

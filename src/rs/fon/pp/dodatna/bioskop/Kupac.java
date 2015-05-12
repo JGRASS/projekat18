@@ -11,7 +11,7 @@ public class Kupac implements Serializable{
 	String ime;
 	int brojKarata; 
 	int [] brojSedista;// ja sam ovo kao napravila, umesto brojSedista(zbog te mogucnosti grupe), ali mislim da su nam potrebni samo ova dva atributa,
-	//a nikakav broj sedita, jer to cemo u metodi kada rezervisemo karte
+	//a nikakav broj sedita, jer to cemo u metodi kada rezervisemo karte, umesto da gledamo true ili false gldeacemo da li je null ili nije null
 	
 	public String getIme() {
 		return ime;

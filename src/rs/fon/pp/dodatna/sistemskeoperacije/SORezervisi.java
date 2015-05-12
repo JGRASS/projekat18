@@ -16,10 +16,10 @@ public class SORezervisi {
 			if(projekcije.get(i).equals(p))
 				projekcije.get(i).getKupci().add(k);
 			for (int j = 0; j < redniBrojeviSedista.length; j++) {
-				if(projekcije.get(i).getSedista()[j] == true)
+			/*	if(projekcije.get(i).getSedista()[j] == true)
 					throw new RuntimeException("Ne možete rezervisati već zauzeto mesto.");
 				else
-					projekcije.get(i).getSedista()[j] = true;
+					projekcije.get(i).getSedista()[j] = true;*/
 			}
 		}
 	}

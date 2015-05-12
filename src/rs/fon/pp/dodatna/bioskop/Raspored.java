@@ -11,8 +11,8 @@ import rs.fon.pp.dodatna.sistemskeoperacije.SOUcitajIzFajla;
 
 
 public class Raspored implements RasporedInterface{
-	
-	LinkedList<Projekcija> projekcije;
+	public static LinkedList<Film> filmovi = new LinkedList<Film>();
+	protected LinkedList<Projekcija> projekcije;
 	
 	public void dodajFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, int godina2, int mesec2, int dan2) {
 		Film film = new Film();
@@ -36,7 +36,7 @@ public class Raspored implements RasporedInterface{
 		p.setFilm(film);
 		p.setDatumPrikazivanja(godina, mesec, dan, sat, minuti);
 		p.setSala(sala);
-		p.setSedista(sala.getSedista().length);
+	//	p.setSedista(sala.getSedista().length);
 		p.setDaLiJe3D(daLiJe3D);
 		p.setCena(cena);
 		p.setSifra(sifra);
