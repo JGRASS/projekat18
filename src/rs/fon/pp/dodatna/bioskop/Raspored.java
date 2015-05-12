@@ -4,46 +4,32 @@ package rs.fon.pp.dodatna.bioskop;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
+import rs.fon.pp.dodatna.gui.GUIKontroler;
+import rs.fon.pp.dodatna.sistemskeoperacije.SODodajFilm;
+import rs.fon.pp.dodatna.sistemskeoperacije.SODodajProjekciju;
+import rs.fon.pp.dodatna.sistemskeoperacije.SODodajSalu;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOPronadjiProjekcijeFilmDatum;
 import rs.fon.pp.dodatna.sistemskeoperacije.SORezervisi;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOSacuvajUFajl;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOUcitajIzFajla;
+import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiDatume;
+import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiFilmove;
+import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveFilmove;
+import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveSale;
 
 
 public class Raspored implements RasporedInterface{
-	public static LinkedList<Film> filmovi = new LinkedList<Film>();
+	
 	protected LinkedList<Projekcija> projekcije;
+	protected LinkedList<Film> filmovi;
+	protected LinkedList<Sala> sale;
 	
-	public void dodajFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, int godina2, int mesec2, int dan2) {
-		Film film = new Film();
-		film.setNaziv(naziv);
-		film.setZanr(zanr);
-		film.setVremeTrajanja(trajanje);
-		film.setDatumPocetka(godina1, mesec1, dan1);
-		film.setDatumZavrsetka(godina2, mesec2, dan2);
+	public void dodajProjekciju(int sifra, Film film, int godina, int mesec, int dan, int sat, int minuti,
+			Sala sala, boolean daLiJe3D, double cena) {
+		SODodajProjekciju.dodajProjekciju(sifra, film, godina, mesec, dan, sat, minuti, sala, daLiJe3D, cena, projekcije);
 	}
 	
-	public void dodajSalu(String naziv, int sifra, int brojSedista, int brojRedova) {
-		Sala sala = new Sala();
-		sala.setNaziv(naziv);
-		sala.setSifra(sifra);
-		sala.setSedista(brojSedista);
-		sala.setBrojRedova(brojRedova);
-	}
-
-	public void dodajProjekciju(int sifra, Film film, int godina, int mesec, int dan, int sat, int minuti, Sala sala, boolean daLiJe3D, double cena) {
-		Projekcija p = new Projekcija();
-		p.setFilm(film);
-		p.setDatumPrikazivanja(godina, mesec, dan, sat, minuti);
-		p.setSala(sala);
-	//	p.setSedista(sala.getSedista().length);
-		p.setDaLiJe3D(daLiJe3D);
-		p.setCena(cena);
-		p.setSifra(sifra);
-		projekcije.add(p);
-	}
-	
-	public int pronadjiProjekcijuSifra(int sifra) {
+	/*public int pronadjiProjekcijuSifra(int sifra) {
 		try {
 			int pom = 0;
 			for (int i = 0; i < projekcije.size(); i++) {
@@ -54,34 +40,14 @@ public class Raspored implements RasporedInterface{
 		} catch (Exception e) {
 			throw new RuntimeException("Projekcija nije nađena.");
 		}
+	}*/
+	
+	public LinkedList<String> vratiFilmove() {
+		return(SOVratiFilmove.vratiFilmove(projekcije));
 	}
 	
-	public LinkedList<String> vratiFilmove(LinkedList<Projekcija> projekcije) {
-		LinkedList<String> filmovi = new LinkedList<String>();
-		for (int i = 0; i < projekcije.size(); i++) {
-			if(filmovi.isEmpty())
-				filmovi.add(projekcije.get(i).getFilm().getNaziv());
-			else {
-				if(filmovi.contains(projekcije.get(i).getFilm().getNaziv()))
-						continue;
-			}	
-		}
-		return filmovi;
-	}
-	
-	public LinkedList<String> vratiDatume(LinkedList<Projekcija> projekcije) {
-		LinkedList<String> datumi = new LinkedList<String>();
-		for (int i = 0; i < projekcije.size(); i++) {
-			String datum = projekcije.get(i).getDatumPrikazivanja().get(GregorianCalendar.DAY_OF_MONTH) + "/" +
-					projekcije.get(i).getDatumPrikazivanja().get(GregorianCalendar.MONTH) + "/" +
-					projekcije.get(i).getDatumPrikazivanja().get(GregorianCalendar.YEAR);
-			if(datumi.isEmpty() || !(datumi.contains(datum))) {
-				datumi.add(datum);
-			}
-			else 
-				continue;
-		}
-		return datumi;
+	public LinkedList<String> vratiDatume() {
+		return (SOVratiDatume.vratiDatume(projekcije));
 	}
 	
 	public LinkedList<Projekcija> pronadjiProjekcijeFilmDatum(String film, GregorianCalendar datum) {
@@ -93,15 +59,31 @@ public class Raspored implements RasporedInterface{
 	}
 	
 	public void sacuvajUFajl(String putanja) {
-		SOSacuvajUFajl.sacuvajUFajl(putanja, projekcije);
+		SOSacuvajUFajl.sacuvajUFajl(putanja, projekcije, filmovi, sale);
 	}
 	
 	public void ucitajIzFajla(String putanja) {
-		SOUcitajIzFajla.ucitajIzFajla(putanja, projekcije);
+		SOUcitajIzFajla.ucitajIzFajla(putanja, projekcije, filmovi, sale);
 	}
 		
 	public LinkedList<Projekcija> vratiSveProjekcije() {
 		return projekcije;
+	}
+	
+	public void dodajSalu(String naziv, int sifra, int brojSedista, int brojRedova) {
+		SODodajSalu.dodajSalu(naziv, sifra, brojSedista, brojRedova, sale);
+	}
+	
+	public void dodajFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, 
+			int godina2, int mesec2, int dan2) {
+		SODodajFilm.dodajFilm(naziv, zanr, trajanje, godina1, mesec1, dan1, godina2, mesec2, dan2, filmovi);
+	}
+	public LinkedList<String> vratiSveFilmove() {
+		return(SOVratiSveFilmove.vratiSveFilmove(filmovi));
+	}
+	
+	public LinkedList<String> vratiSveSale() {
+		return(SOVratiSveSale.vratiSveSale(sale));
 	}
 }
 

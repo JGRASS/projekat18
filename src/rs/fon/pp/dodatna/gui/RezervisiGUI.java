@@ -11,10 +11,14 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 
+import rs.fon.pp.dodatna.bioskop.Film;
 import rs.fon.pp.dodatna.bioskop.Projekcija;
+import rs.fon.pp.dodatna.bioskop.Raspored;
+import rs.fon.pp.dodatna.bioskop.RasporedInterface;
 
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+
 import javax.swing.ImageIcon;
 
 public class RezervisiGUI extends JFrame {
@@ -38,7 +42,7 @@ public class RezervisiGUI extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public RezervisiGUI(BioskopGUI glavniProzor, LinkedList<Projekcija> projekcije) {
+	public RezervisiGUI(BioskopGUI glavniProzor) {
 		setTitle("Rezervi\u0161i");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -56,14 +60,13 @@ public class RezervisiGUI extends JFrame {
 		contentPane.add(getComboBox_1());
 		contentPane.add(getComboBox_2());
 		contentPane.add(getLblDatum());
-		this.projekcije = projekcije;
 		this.glavniProzor = glavniProzor;
 		
 	}
 	private JLabel getLblImeKupca() {
 		if (lblImeKupca == null) {
 			lblImeKupca = new JLabel("Ime kupca");
-			lblImeKupca.setIcon(new ImageIcon(RezervisiGUI.class.getResource("/Icons/slike/Close-2-icon.png")));
+			lblImeKupca.setIcon(null);
 			lblImeKupca.setBounds(23, 29, 80, 16);
 		}
 		return lblImeKupca;
@@ -123,6 +126,7 @@ public class RezervisiGUI extends JFrame {
 		if (comboBox_1 == null) {
 			comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(320, 26, 80, 22);
+
 		}
 		return comboBox_1;
 	}
@@ -149,17 +153,6 @@ public class RezervisiGUI extends JFrame {
 		return lblDatum;
 	}
 	
-	protected void izlistajFilmove(LinkedList<String> filmovi) {
-		for (int i = 0; i < filmovi.size(); i++) {
-			comboBox_1.addItem(filmovi.get(i));
-		}
-	}
-	
-	protected void izlistajDatume(LinkedList<String> datumi) {
-		for (int i = 0; i < datumi.size(); i++) {
-			comboBox_2.addItem(datumi.get(i));
-		}
-	}
 	
 	protected void izlistajProjekcije(LinkedList<Projekcija> izabrane) {
 		for (int i = 0; i < izabrane.size(); i++) {

@@ -55,6 +55,7 @@ public class BioskopGUI extends JFrame {
 	private JButton btnSauvajSvePromene;
 	protected JTextArea textArea;
 	private JList list;
+	protected Raspored bioskop;
 
 
 	/**
@@ -79,6 +80,7 @@ public class BioskopGUI extends JFrame {
 		contentPane.add(getBtnDodajProjekciju());
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getBtnSauvajSvePromene());
+		bioskop = new Raspored();
 	}
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
@@ -152,7 +154,7 @@ public class BioskopGUI extends JFrame {
 			btnNewButton = new JButton("Rezervi\u0161i kartu");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-		//			GUIKontroler.prikaziRezervisiGUI(this, projekcije);
+				GUIKontroler.prikaziRezervisiGUI();
 				}
 			});
 			btnNewButton.setBounds(229, 13, 272, 54);
