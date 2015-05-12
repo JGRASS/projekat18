@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
 public class DodajFilmGUI extends JFrame {
 
 	private JPanel contentPane;
-	//private LinkedList<Film> filmovi = new LinkedList<Film>();
+	
 	private JTextField nazivFilma;
 	private JLabel lblNazivFilma;
 	private JLabel labelZanr;
@@ -50,27 +50,12 @@ public class DodajFilmGUI extends JFrame {
 	private JSpinner danZ;
 	private JSpinner mesecZ;
 	private JSpinner godinaZ;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DodajFilmGUI frame = new DodajFilmGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private BioskopGUI glavniProzor;
 	/**
 	 * Create the frame.
 	 */
-	public DodajFilmGUI() {
+	public DodajFilmGUI(BioskopGUI glavniProzor) {
+		setResizable(false);
 		setTitle("Dodaj film");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, -48, 450, 300);
@@ -96,6 +81,7 @@ public class DodajFilmGUI extends JFrame {
 		contentPane.add(getDanZ());
 		contentPane.add(getMesecZ());
 		contentPane.add(getGodinaZ());
+		this.glavniProzor = glavniProzor;
 	}
 	private JTextField getNazivFilma() {
 		if (nazivFilma == null) {
@@ -169,14 +155,14 @@ public class DodajFilmGUI extends JFrame {
 	private JLabel getLblDatumPocetkaPrikazivanja() {
 		if (lblDatumPocetkaPrikazivanja == null) {
 			lblDatumPocetkaPrikazivanja = new JLabel("Datum po\u010Detka prikazivanja");
-			lblDatumPocetkaPrikazivanja.setBounds(239, 81, 164, 14);
+			lblDatumPocetkaPrikazivanja.setBounds(239, 81, 184, 14);
 		}
 		return lblDatumPocetkaPrikazivanja;
 	}
 	private JLabel getLblDatumZavretkaPrikazivanja() {
 		if (lblDatumZavretkaPrikazivanja == null) {
 			lblDatumZavretkaPrikazivanja = new JLabel("Datum zavr\u0161etka prikazivanja");
-			lblDatumZavretkaPrikazivanja.setBounds(239, 137, 164, 14);
+			lblDatumZavretkaPrikazivanja.setBounds(239, 137, 184, 14);
 		}
 		return lblDatumZavretkaPrikazivanja;
 	}
@@ -201,6 +187,7 @@ public class DodajFilmGUI extends JFrame {
 															(Integer)danZ.getValue());
 					
 					Raspored.filmovi.add(f);
+					glavniProzor.getTextArea_1().setText(f.toString());
 					dispose();
 					
 					

@@ -53,7 +53,7 @@ public class BioskopGUI extends JFrame {
 	private JMenuItem mntmSauvaj;
 	private JMenuItem mntmOtvori;
 	private JButton btnSauvajSvePromene;
-	private JTextArea textArea;
+	protected JTextArea textArea;
 	private JList list;
 
 
@@ -128,6 +128,7 @@ public class BioskopGUI extends JFrame {
 			btnDodajNoviFilm = new JButton("Dodaj novi film");
 			btnDodajNoviFilm.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziDodajFilmGUI();
 				}
 			});
 			btnDodajNoviFilm.setBounds(12, 13, 130, 25);
@@ -139,7 +140,7 @@ public class BioskopGUI extends JFrame {
 			btnDodajProjekciju = new JButton("Dodaj projekciju");
 			btnDodajProjekciju.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					GUIKontroler.prikaziDodajProjekcijuGUI();
 				}
 			});
 			btnDodajProjekciju.setBounds(12, 50, 130, 25);
@@ -198,7 +199,7 @@ public class BioskopGUI extends JFrame {
 		}
 		return btnSauvajSvePromene;
 	}
-	private JTextArea getTextArea_1() {
+	JTextArea getTextArea_1() {
 		if (textArea == null) {
 			textArea = new JTextArea();
 		}

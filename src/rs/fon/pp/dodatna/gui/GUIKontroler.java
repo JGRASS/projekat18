@@ -52,7 +52,20 @@ public class GUIKontroler {
 		izaberiProzor.prikaziSalu(projekcija.getSala().getBrojRedova(), projekcija.getSala().getBrojKolona());
 	}
 	
-	//public static void prikazi
+	public static void prikaziDodajFilmGUI() {
+		DodajFilmGUI dodajFilmProzor = new DodajFilmGUI(glavniProzor);
+		dodajFilmProzor.setLocationRelativeTo(glavniProzor.getContentPane());
+		dodajFilmProzor.setVisible(true);
+		
+	}
+	
+	public static void prikaziDodajProjekcijuGUI() {
+		DodajProjekcijuGUI dodajProjekcijuProzor = new DodajProjekcijuGUI(glavniProzor);
+		dodajProjekcijuProzor.setLocationRelativeTo(glavniProzor.getContentPane());
+		dodajProjekcijuProzor.setVisible(true);
+		
+	}
+
 	
 	
 	
