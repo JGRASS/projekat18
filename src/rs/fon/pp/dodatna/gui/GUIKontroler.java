@@ -74,24 +74,35 @@ public class GUIKontroler {
 		try {
 			bioskop.dodajFilm(naziv, zanr, trajanje, godina1, mesec1, dan1, godina2, mesec2, dan2);
 			
-			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiFilmove().getLast().toString());
+			
+			glavniProzor.textArea.setText("Uspešno je unet - " + vratiFilmove().getLast().toString());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
 					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	public static LinkedList<String> vratiFilmove(LinkedList<Projekcija> projekcije) {
+	public static LinkedList<String> vratiFilmove() {
 		
-			LinkedList<String> filmovi = new LinkedList<String>();
-			for (int i = 0; i < projekcije.size(); i++) {
-				if(filmovi.isEmpty() || !(filmovi.contains(projekcije.get(i).getFilm().getNaziv())))
-					filmovi.add(projekcije.get(i).getFilm().getNaziv());
+			LinkedList<String> filmoviString = new LinkedList<String>();
+			for (int i = 0; i < Raspored.filmovi.size(); i++) {
+				if(filmoviString.isEmpty() || !(filmoviString.contains(Raspored.filmovi.get(i))))
+					filmoviString.add(Raspored.filmovi.get(i).getNaziv());
 				else 
 							continue;
 			}
-			return filmovi;
+			return filmoviString;
 		}
+	
+	public static String[] vratiNizFilmova() {
+		
+		String [] filmoviNiz = new String [Raspored.filmovi.size()];
+		LinkedList<String> filmoviString = vratiFilmove();
+		for (int i = 0; i < filmoviString.size(); i++) {
+			filmoviNiz[i]= filmoviString.get(i);
+		}
+		return filmoviNiz;
+	}
 	
 	
 	public static void ucitajIzFajla() {

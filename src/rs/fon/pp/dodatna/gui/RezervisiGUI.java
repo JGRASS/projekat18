@@ -20,6 +20,7 @@ import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
+import javax.swing.DefaultComboBoxModel;
 
 public class RezervisiGUI extends JFrame {
 
@@ -29,7 +30,7 @@ public class RezervisiGUI extends JFrame {
 	private JLabel lblNewLabel;
 	private JTextField textField_1;
 	private JScrollPane scrollPane;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JLabel lblProjekcija;
 	private JLabel lblFilmovi;
 	private JComboBox<String> comboBox_1;
@@ -102,9 +103,9 @@ public class RezervisiGUI extends JFrame {
 		}
 		return scrollPane;
 	}
-	private JComboBox getComboBox() {
+	private JComboBox<String> getComboBox() {
 		if (comboBox == null) {
-			comboBox = new JComboBox();
+			comboBox = new JComboBox<String>();
 		}
 		return comboBox;
 	}
@@ -122,17 +123,18 @@ public class RezervisiGUI extends JFrame {
 		}
 		return lblFilmovi;
 	}
-	private JComboBox getComboBox_1() {
+	private JComboBox<String> getComboBox_1() {
 		if (comboBox_1 == null) {
-			comboBox_1 = new JComboBox();
+			comboBox_1 = new JComboBox<String>();
+			comboBox_1.setModel(new DefaultComboBoxModel<String>(GUIKontroler.vratiNizFilmova()));
 		comboBox_1.setBounds(320, 26, 80, 22);
 
 		}
 		return comboBox_1;
 	}
-	private JComboBox getComboBox_2() {
+	private JComboBox<String> getComboBox_2() {
 		if (comboBox_2 == null) {
-			comboBox_2 = new JComboBox();
+			comboBox_2 = new JComboBox<String>();
 			GregorianCalendar d = new GregorianCalendar();
 			for (int i = 0; i < 14; i++) {
 				int dan = d.get(GregorianCalendar.DAY_OF_MONTH) + i;

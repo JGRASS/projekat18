@@ -20,9 +20,9 @@ import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveSale;
 
 public class Raspored implements RasporedInterface{
 	
-	protected LinkedList<Projekcija> projekcije;
-	protected LinkedList<Film> filmovi;
-	protected LinkedList<Sala> sale;
+	protected LinkedList<Projekcija> projekcije = new LinkedList<Projekcija>();
+	public static LinkedList<Film> filmovi = new LinkedList<Film>();
+	protected LinkedList<Sala> sale = new LinkedList<Sala>();
 	
 	public void dodajProjekciju(int sifra, Film film, int godina, int mesec, int dan, int sat, int minuti,
 			Sala sala, boolean daLiJe3D, double cena) {
@@ -59,11 +59,11 @@ public class Raspored implements RasporedInterface{
 	}
 	
 	public void sacuvajUFajl(String putanja) {
-		SOSacuvajUFajl.sacuvajUFajl(putanja, projekcije, filmovi, sale);
+		SOSacuvajUFajl.sacuvajUFajl(putanja, projekcije, getFilmovi(), sale);
 	}
 	
 	public void ucitajIzFajla(String putanja) {
-		SOUcitajIzFajla.ucitajIzFajla(putanja, projekcije, filmovi, sale);
+		SOUcitajIzFajla.ucitajIzFajla(putanja, projekcije, getFilmovi(), sale);
 	}
 		
 	public LinkedList<Projekcija> vratiSveProjekcije() {
@@ -76,14 +76,22 @@ public class Raspored implements RasporedInterface{
 	
 	public void dodajFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, 
 			int godina2, int mesec2, int dan2) {
-		SODodajFilm.dodajFilm(naziv, zanr, trajanje, godina1, mesec1, dan1, godina2, mesec2, dan2, filmovi);
+		SODodajFilm.dodajFilm(naziv, zanr, trajanje, godina1, mesec1, dan1, godina2, mesec2, dan2, getFilmovi());
 	}
 	public LinkedList<String> vratiSveFilmove() {
-		return(SOVratiSveFilmove.vratiSveFilmove(filmovi));
+		return(SOVratiSveFilmove.vratiSveFilmove(getFilmovi()));
 	}
 	
 	public LinkedList<String> vratiSveSale() {
 		return(SOVratiSveSale.vratiSveSale(sale));
+	}
+
+	public static LinkedList<Film> getFilmovi() {
+		return filmovi;
+	}
+
+	public void setFilmovi(LinkedList<Film> filmovi) {
+		this.filmovi = filmovi;
 	}
 }
 
