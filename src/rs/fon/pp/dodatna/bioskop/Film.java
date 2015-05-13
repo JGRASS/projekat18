@@ -201,9 +201,9 @@ public class Film implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Naziv filma: " + naziv + ", Ĺľanr filma: " + zanr + ", vreme trajanja: " + vremeTrajanja + 
-				", datum poÄŤetka prikazivanja filma: " + datumPocetka.getTime() +
-				", datum zavrĹˇetka prikazivanja filma: " + datumZavrsetka.getTime();
+		return "Naziv filma: " + naziv + ", Žanr filma: " + zanr + ", vreme trajanja: " + vremeTrajanja + 
+				", datum početka prikazivanja filma: " + datumPocetka.getTime() +
+				", datum završetka prikazivanja filma: " + datumZavrsetka.getTime();
 	}
 
 

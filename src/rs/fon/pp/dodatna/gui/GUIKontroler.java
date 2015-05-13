@@ -106,6 +106,7 @@ public class GUIKontroler {
 			Sala sala = new Sala();
 			sala.setNaziv(naziv);
 			sala.setSifra(sifra);
+			sala.setSedista(brojRedova*brojKolona);
 			sala.setBrojRedova(brojRedova);
 			sala.setBrojKolona(brojKolona);
 			bioskop.dodajSalu(sala);
@@ -177,6 +178,13 @@ public class GUIKontroler {
 					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 		return false;
+	}
+	
+	public static void prikaziDodajSaluGUI(){
+		DodajSaluGUI dodajSaluProzor = new DodajSaluGUI(glavniProzor);
+		dodajSaluProzor.setLocationRelativeTo(glavniProzor.getContentPane());
+		dodajSaluProzor.setVisible(true);
+		
 	}
 	
 	//prozor.izlistajFilmove(bioskop.vratiFilmove());

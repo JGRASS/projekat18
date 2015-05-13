@@ -11,6 +11,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class DodajSaluGUI extends JFrame {
 
 	private JPanel contentPane;
@@ -25,14 +28,17 @@ public class DodajSaluGUI extends JFrame {
 	private JTextField textField_3;
 	private JButton btnNewButton;
 	private JButton btnOdustani;
+	private BioskopGUI glavniProzor;
 
 
 
 	/**
 	 * Create the frame.
+	 * @param glavniProzor 
 	 */
-	public DodajSaluGUI() {
+	public DodajSaluGUI(BioskopGUI glavniProzor) {
 		createContents();
+		this.glavniProzor = glavniProzor;
 	}
 	private void createContents() {
 		setTitle("Dodaj salu");
@@ -43,6 +49,7 @@ public class DodajSaluGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel_1(), BorderLayout.CENTER);
+		
 	}
 	private JPanel getPanel_1() {
 		if (panel == null) {
@@ -128,6 +135,13 @@ public class DodajSaluGUI extends JFrame {
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("Dodaj");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.unesiSalu(textField.getText(), Integer.parseInt(textField_3.getText()),
+							Integer.parseInt(textField_1.getText()), Integer.parseInt(textField_2.getText()));	
+					dispose();
+				}
+			});
 			btnNewButton.setBounds(231, 122, 169, 45);
 		}
 		return btnNewButton;

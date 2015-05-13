@@ -125,7 +125,7 @@ public class BioskopGUI extends JFrame {
 			mntmDodajizmeniSalu = new JMenuItem("Dodaj/izmeni salu");
 			mntmDodajizmeniSalu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
+					GUIKontroler.prikaziDodajSaluGUI();
 				}
 			});
 		}
@@ -241,6 +241,8 @@ public class BioskopGUI extends JFrame {
 	JTextArea getTextArea_1() {
 		if (textArea == null) {
 			textArea = new JTextArea();
+			textArea.setEditable(false);
+			textArea.setWrapStyleWord(true);
 		}
 		return textArea;
 	}

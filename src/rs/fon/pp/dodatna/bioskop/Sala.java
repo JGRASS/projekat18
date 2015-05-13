@@ -115,7 +115,7 @@ public class Sala implements Serializable{
 	 * manji od jedan ili deljiv sa brojem sedista u sali
 	 */
 	public void setBrojRedova(int brojRedova) {
-		if(brojRedova < 1 || sedista.length % brojRedova == 0)
+		if(brojRedova < 1 ||!( sedista.length % brojRedova == 0))
 			throw new RuntimeException("Broj redova mora biti pozitivan broj i broj koji deli broj sedišta.");
 		this.brojRedova = brojRedova;
 	}

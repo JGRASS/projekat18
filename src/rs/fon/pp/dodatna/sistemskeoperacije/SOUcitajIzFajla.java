@@ -21,10 +21,12 @@ public class SOUcitajIzFajla {
 			LinkedList<Projekcija> projekcije1 = (LinkedList<Projekcija>)(in.readObject());
 			projekcije.clear();
 			projekcije.addAll(projekcije1);
+			
 			@SuppressWarnings("unchecked")
 			LinkedList<Film> filmovi1= (LinkedList<Film>)(in.readObject());
 			filmovi.clear();
 			filmovi.addAll(filmovi1);
+			
 			@SuppressWarnings("unchecked")
 			LinkedList<Sala> sale1 = (LinkedList<Sala>)(in.readObject());
 			sale.clear();
