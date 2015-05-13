@@ -126,7 +126,7 @@ public class RezervisiGUI extends JFrame {
 	private JComboBox<String> getComboBox_1() {
 		if (comboBox_1 == null) {
 			comboBox_1 = new JComboBox<String>();
-			comboBox_1.setModel(new DefaultComboBoxModel<String>(GUIKontroler.vratiNizFilmova()));
+			//comboBox_1.setModel(new DefaultComboBoxModel<String>(GUIKontroler.vratiNizFilmova()));
 		comboBox_1.setBounds(320, 26, 80, 22);
 
 		}

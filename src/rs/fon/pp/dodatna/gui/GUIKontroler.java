@@ -12,6 +12,7 @@ import rs.fon.pp.dodatna.bioskop.Film;
 import rs.fon.pp.dodatna.bioskop.Projekcija;
 import rs.fon.pp.dodatna.bioskop.Raspored;
 import rs.fon.pp.dodatna.bioskop.RasporedInterface;
+import rs.fon.pp.dodatna.bioskop.Sala;
 
 import javax.swing.JFrame;
 
@@ -66,8 +67,8 @@ public class GUIKontroler {
 		DodajProjekcijuGUI dodajProjekcijuProzor = new DodajProjekcijuGUI(glavniProzor);
 		dodajProjekcijuProzor.setLocationRelativeTo(glavniProzor.getContentPane());
 		dodajProjekcijuProzor.setVisible(true);
-		dodajProjekcijuProzor.izlistajSveSale(bioskop.vratiSveSale());
-		dodajProjekcijuProzor.izlistajSveFilmove(bioskop.vratiSveFilmove());
+		dodajProjekcijuProzor.izlistajSveSale(bioskop.vratiSveSaleString());
+		dodajProjekcijuProzor.izlistajSveFilmove(bioskop.vratiSveFilmoveString());
 		
 	}
 	
@@ -81,14 +82,23 @@ public class GUIKontroler {
 			film.setDatumZavrsetka(godina2, mesec2, dan2);
 			bioskop.dodajFilm(film);
 			
-			glavniProzor.textArea.setText("Uspešno je unet - " + vratiFilmove().getLast().toString());
+			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiFilmove().getLast().toString());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
 					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	public static LinkedList<String> vratiFilmove() {
+	public static void unesiProjekciju(int sifra, Film film, int godina, int mesec, int dan, int sat, int minuti,
+			Sala sala, boolean daLiJe3D, double cena) {
+		
+	}
+	
+	public static void unesiSalu(String naziv, int sifra, int brojSedista, int brojRedova) {
+		
+	}
+	//ovo napred cemo videti
+	/*public static LinkedList<String> vratiFilmove() {
 		
 			LinkedList<String> filmoviString = new LinkedList<String>();
 			for (int i = 0; i < Raspored.filmovi.size(); i++) {
@@ -108,7 +118,7 @@ public class GUIKontroler {
 			filmoviNiz[i]= filmoviString.get(i);
 		}
 		return filmoviNiz;
-	}
+	}*/
 	
 	
 	public static void ucitajIzFajla() {
@@ -119,7 +129,7 @@ public class GUIKontroler {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				bioskop.ucitajIzFajla(file.getAbsolutePath());
-				glavniProzor.prikaziSveProjekcije(bioskop.vratiSveProjekcije());
+				glavniProzor.prikaziSveProjekcije(bioskop.vratiProjekcije());
 			}	
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e1.getMessage(),

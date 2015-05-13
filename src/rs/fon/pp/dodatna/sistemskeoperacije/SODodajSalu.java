@@ -6,16 +6,11 @@ import rs.fon.pp.dodatna.bioskop.Sala;
 
 public class SODodajSalu {
 	
-	public static void dodajSalu(String naziv, int sifra, int brojSedista, int brojRedova, LinkedList<Sala> sale) {
-		Sala sala = new Sala();
-		sala.setNaziv(naziv);
-		sala.setSifra(sifra);
-		sala.setSedista(brojSedista);
-		sala.setBrojRedova(brojRedova);
-		if(!(sale.contains(sala)))
+	public static void dodajSalu(Sala sala, LinkedList<Sala> sale) {
+		if(!(sale.contains(sala)) && sala != null)
 		sale.add(sala);
 		else
-			throw new RuntimeException("Sala je već uneta u sistem.");
+			throw new RuntimeException("Sala je već uneta u sistem ili ste pokušali uneti null objekat.");
 	}
 
 }

@@ -4,7 +4,6 @@ package rs.fon.pp.dodatna.bioskop;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
-import rs.fon.pp.dodatna.gui.GUIKontroler;
 import rs.fon.pp.dodatna.sistemskeoperacije.SODodajFilm;
 import rs.fon.pp.dodatna.sistemskeoperacije.SODodajProjekciju;
 import rs.fon.pp.dodatna.sistemskeoperacije.SODodajSalu;
@@ -21,32 +20,18 @@ import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveSale;
 public class Raspored implements RasporedInterface{
 	
 	protected LinkedList<Projekcija> projekcije = new LinkedList<Projekcija>();
-	public static LinkedList<Film> filmovi = new LinkedList<Film>();
+	protected LinkedList<Film> filmovi = new LinkedList<Film>();
 	protected LinkedList<Sala> sale = new LinkedList<Sala>();
 	
-	public void dodajProjekciju(int sifra, Film film, int godina, int mesec, int dan, int sat, int minuti,
-			Sala sala, boolean daLiJe3D, double cena) {
-		SODodajProjekciju.dodajProjekciju(sifra, film, godina, mesec, dan, sat, minuti, sala, daLiJe3D, cena, projekcije);
+	public void dodajProjekciju(Projekcija projekcija) {
+		SODodajProjekciju.dodajProjekciju(projekcija, projekcije);
 	}
 	
-	/*public int pronadjiProjekcijuSifra(int sifra) {
-		try {
-			int pom = 0;
-			for (int i = 0; i < projekcije.size(); i++) {
-				if(projekcije.get(i).getSifra() == sifra)
-					pom = i;
-			}
-			return pom;
-		} catch (Exception e) {
-			throw new RuntimeException("Projekcija nije nađena.");
-		}
-	}*/
-	
-	public LinkedList<String> vratiFilmove() {
+	public LinkedList<String> vratiFilmoveString() {
 		return(SOVratiFilmove.vratiFilmove(projekcije));
 	}
 	
-	public LinkedList<String> vratiDatume() {
+	public LinkedList<String> vratiDatumeString() {
 		return (SOVratiDatume.vratiDatume(projekcije));
 	}
 	
@@ -59,42 +44,37 @@ public class Raspored implements RasporedInterface{
 	}
 	
 	public void sacuvajUFajl(String putanja) {
-		SOSacuvajUFajl.sacuvajUFajl(putanja, projekcije, getFilmovi(), sale);
+		SOSacuvajUFajl.sacuvajUFajl(putanja, projekcije, filmovi, sale);
 	}
 	
 	public void ucitajIzFajla(String putanja) {
-		SOUcitajIzFajla.ucitajIzFajla(putanja, projekcije, getFilmovi(), sale);
-	}
-		
-	public LinkedList<Projekcija> vratiSveProjekcije() {
-		return projekcije;
+		SOUcitajIzFajla.ucitajIzFajla(putanja, projekcije, filmovi, sale);
 	}
 	
-	public void dodajSalu(String naziv, int sifra, int brojSedista, int brojRedova) {
-		SODodajSalu.dodajSalu(naziv, sifra, brojSedista, brojRedova, sale);
+	public void dodajSalu(Sala sala) {
+		SODodajSalu.dodajSalu(sala, sale);
 	}
 	
 	public void dodajFilm(Film film) {
 		SODodajFilm.dodajFilm(film, filmovi);
 	}
-	public LinkedList<String> vratiSveFilmove() {
-		return(SOVratiSveFilmove.vratiSveFilmove(getFilmovi()));
+	public LinkedList<String> vratiSveFilmoveString() {
+		return(SOVratiSveFilmove.vratiSveFilmove(filmovi));
 	}
 	
-	public LinkedList<String> vratiSveSale() {
+	public LinkedList<String> vratiSveSaleString() {
 		return(SOVratiSveSale.vratiSveSale(sale));
-	}
-
-	public static LinkedList<Film> getFilmovi() {
-		return filmovi;
-	}
-
-	public void setFilmovi(LinkedList<Film> filmovi) {
-		this.filmovi = filmovi;
 	}
 	
 	public LinkedList<Sala> vratiSale() {
 		return sale;
+	}
+
+	public LinkedList<Projekcija> vratiProjekcije() {
+		return projekcije;
+	}
+	public LinkedList<Film> vratiFilmove() {
+		return filmovi;
 	}
 }
 
