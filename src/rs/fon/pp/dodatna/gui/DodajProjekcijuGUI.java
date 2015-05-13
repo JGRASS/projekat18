@@ -25,6 +25,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DodajProjekcijuGUI extends JFrame {
 
@@ -77,6 +79,11 @@ public class DodajProjekcijuGUI extends JFrame {
 	private JButton getBtnOdustani() {
 		if (btnOdustani == null) {
 			btnOdustani = new JButton("Odustani");
+			btnOdustani.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					dispose();
+				}
+			});
 			btnOdustani.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 			btnOdustani.setBounds(198, 202, 142, 39);
 		}

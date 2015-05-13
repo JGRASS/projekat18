@@ -17,19 +17,23 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import java.awt.Dimension;
+import java.awt.Font;
 
 public class IzaberiSedisteGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
-	private Projekcija projekcija;
+	private JPanel panel_1;
+	private JButton btnNewButton;
 	
 	/**
 	 * Create the frame.
 	 */
 		
 	
-	public IzaberiSedisteGUI(RezervisiGUI prozor, LinkedList<Projekcija> projekcije, Projekcija projekcija) {
+	public IzaberiSedisteGUI(RezervisiGUI prozor) {
 		createContents();
 	}
 	private void createContents() {
@@ -41,7 +45,7 @@ public class IzaberiSedisteGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel(), BorderLayout.CENTER);
-		this.projekcija = projekcija;
+		contentPane.add(getPanel_1(), BorderLayout.EAST);
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -50,13 +54,10 @@ public class IzaberiSedisteGUI extends JFrame {
 		return panel;
 	}
 
-	
 	public void prikaziSalu (int redovi, int kolone) {
-		kolone = 5;
-		redovi = 4;
-		panel.setLayout(new GridLayout(kolone, redovi));
-		 for (int red = 0; red < redovi; redovi++) {
-	            for (int kolona = 0; kolona < kolone; kolone++) {
+		panel.setLayout(new GridLayout(redovi, kolone, 0, 0));
+		 for (int red = 0; red < redovi; red++) {
+	            for (int kolona = 0; kolona < kolone; kolona++) {
 	                final JToggleButton button = new JToggleButton("Red: " + red+1 + " Sedište: " + kolona+1);
 	                button.addActionListener(new ActionListener() {
 	                    @Override
@@ -73,5 +74,26 @@ public class IzaberiSedisteGUI extends JFrame {
 	                panel.add(button);
 	            }
 		 }
+	}
+	private JPanel getPanel_1() {
+		if (panel_1 == null) {
+			panel_1 = new JPanel();
+			panel_1.setPreferredSize(new Dimension(80, 10));
+			panel_1.setLayout(null);
+			panel_1.add(getBtnNewButton());
+		}
+		return panel_1;
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("OK");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
+			btnNewButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
+			btnNewButton.setBounds(12, 45, 56, 44);
+		}
+		return btnNewButton;
 	}
 }

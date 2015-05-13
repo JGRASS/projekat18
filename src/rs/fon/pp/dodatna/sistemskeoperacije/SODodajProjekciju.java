@@ -1,12 +1,8 @@
 package rs.fon.pp.dodatna.sistemskeoperacije;
 
 import java.util.LinkedList;
-
-import javax.management.RuntimeErrorException;
-
-import rs.fon.pp.dodatna.bioskop.Film;
 import rs.fon.pp.dodatna.bioskop.Projekcija;
-import rs.fon.pp.dodatna.bioskop.Sala;
+
 
 public class SODodajProjekciju {
 	

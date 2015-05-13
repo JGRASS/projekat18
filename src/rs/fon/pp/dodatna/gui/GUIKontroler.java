@@ -2,9 +2,7 @@ package rs.fon.pp.dodatna.gui;
 
 import java.awt.EventQueue;
 import java.io.File;
-import java.util.LinkedList;
 
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -14,7 +12,6 @@ import rs.fon.pp.dodatna.bioskop.Raspored;
 import rs.fon.pp.dodatna.bioskop.RasporedInterface;
 import rs.fon.pp.dodatna.bioskop.Sala;
 
-import javax.swing.JFrame;
 
 
 public class GUIKontroler {
@@ -41,19 +38,29 @@ public class GUIKontroler {
 		});
 	}
 	
+	public static void ugasiAplikaciju() {
+		int opcija = JOptionPane.showConfirmDialog(glavniProzor.getContentPane(),
+				"Izađi iz aplikacije", "Izlazak",
+				JOptionPane.YES_NO_CANCEL_OPTION);
+
+		if (opcija == JOptionPane.YES_OPTION)
+			System.exit(0);
+	}
+	
 	public static void prikaziRezervisiGUI() {
 		RezervisiGUI prozor = new RezervisiGUI(glavniProzor);
 		prozor.setLocationRelativeTo(glavniProzor.getContentPane());
 		prozor.setVisible(true); 
-		//za comboBox je potrebna metoda vratiFilmove koja vraca listu Stringova naziva filmova,
-		//medjutim kako god sam probala nije htelo da funkcionise!!!
+		prozor.izlistajFilmove(bioskop.vratiFilmoveString());
+		prozor.izlistajProjekcije(bioskop.pronadjiProjekcijeFilmDatum(prozor.vratiFilm(), prozor.vratiDatum()));
 	}
 	
-	public static void prikaziIzaberiSedisteGUI(LinkedList<Projekcija> projekcije, Projekcija projekcija) {
-		IzaberiSedisteGUI izaberiProzor = new IzaberiSedisteGUI(prozor, projekcije, prozor.vratiIzabranuProjekciju(projekcije));
+	public static void prikaziIzaberiSedisteGUI(Projekcija projekcij) {
+		IzaberiSedisteGUI izaberiProzor = new IzaberiSedisteGUI(prozor);
 		izaberiProzor.setLocationRelativeTo(glavniProzor.getContentPane());
 		izaberiProzor.setVisible(true);
-		izaberiProzor.prikaziSalu(projekcija.getSala().getBrojRedova(), projekcija.getSala().getBrojKolona());
+		izaberiProzor.prikaziSalu(prozor.vratiIzabranuProjekciju().getSala().getBrojRedova(), 
+				prozor.vratiIzabranuProjekciju().getSala().getBrojKolona());
 	}
 	
 	public static void prikaziDodajFilmGUI() {
@@ -82,10 +89,10 @@ public class GUIKontroler {
 			film.setDatumZavrsetka(godina2, mesec2, dan2);
 			bioskop.dodajFilm(film);
 			
-			glavniProzor.textArea.setText("Uspe�no je unet - " + bioskop.vratiFilmove().getLast().toString());
+			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiFilmove().getLast().toString());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
-					"Gre�ka!", JOptionPane.ERROR_MESSAGE);
+					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -94,9 +101,25 @@ public class GUIKontroler {
 		
 	}
 	
-	public static void unesiSalu(String naziv, int sifra, int brojSedista, int brojRedova) {
-		
+	public static void unesiSalu(String naziv, int sifra, int brojKolona, int brojRedova) {
+		try {
+			Sala sala = new Sala();
+			sala.setNaziv(naziv);
+			sala.setSifra(sifra);
+			sala.setBrojRedova(brojRedova);
+			sala.setBrojKolona(brojKolona);
+			bioskop.dodajSalu(sala);
+			
+			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiSale().getLast().toString());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
+					"Greška!", JOptionPane.ERROR_MESSAGE);
+		}
 	}
+	
+	
+	//public static void rezervisi()
+	
 	//ovo napred cemo videti
 	/*public static LinkedList<String> vratiFilmove() {
 		
@@ -133,7 +156,7 @@ public class GUIKontroler {
 			}	
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e1.getMessage(),
-					"Gre�ka!", JOptionPane.ERROR_MESSAGE);
+					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -151,7 +174,7 @@ public class GUIKontroler {
 			return false;
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e1.getMessage(),
-					"Gre�ka!", JOptionPane.ERROR_MESSAGE);
+					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 		return false;
 	}
