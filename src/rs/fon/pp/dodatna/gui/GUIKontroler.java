@@ -43,7 +43,8 @@ public class GUIKontroler {
 	public static void prikaziRezervisiGUI() {
 		RezervisiGUI prozor = new RezervisiGUI(glavniProzor);
 		prozor.setLocationRelativeTo(glavniProzor.getContentPane());
-		prozor.setVisible(true); //za comboBox je potrebna metoda vratiFilmove koja vraca listu Stringova naziva filmova,
+		prozor.setVisible(true); 
+		//za comboBox je potrebna metoda vratiFilmove koja vraca listu Stringova naziva filmova,
 		//medjutim kako god sam probala nije htelo da funkcionise!!!
 	}
 	
@@ -64,16 +65,21 @@ public class GUIKontroler {
 	public static void prikaziDodajProjekcijuGUI() {
 		DodajProjekcijuGUI dodajProjekcijuProzor = new DodajProjekcijuGUI(glavniProzor);
 		dodajProjekcijuProzor.setLocationRelativeTo(glavniProzor.getContentPane());
-		//dodajProjekcijuProzor.izlistajSveFilmove(bioskop.vratiSveFilmove()); ovo ne moze ovako
-		//dodajProjekcijuProzor.izlistajSveSale(bioskop.vratiSveSale());
 		dodajProjekcijuProzor.setVisible(true);
+		dodajProjekcijuProzor.izlistajSveSale(bioskop.vratiSveSale());
+		dodajProjekcijuProzor.izlistajSveFilmove(bioskop.vratiSveFilmove());
 		
 	}
 	
 	public static void unesiFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, int godina2, int mesec2, int dan2) {
 		try {
-			bioskop.dodajFilm(naziv, zanr, trajanje, godina1, mesec1, dan1, godina2, mesec2, dan2);
-			
+			Film film = new Film();
+			film.setNaziv(naziv);
+			film.setVremeTrajanja(trajanje);
+			film.setZanr(zanr);
+			film.setDatumPocetka(godina1, mesec1, dan1);
+			film.setDatumZavrsetka(godina2, mesec2, dan2);
+			bioskop.dodajFilm(film);
 			
 			glavniProzor.textArea.setText("Uspešno je unet - " + vratiFilmove().getLast().toString());
 		} catch (Exception e) {

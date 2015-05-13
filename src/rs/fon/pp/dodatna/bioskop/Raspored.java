@@ -74,9 +74,8 @@ public class Raspored implements RasporedInterface{
 		SODodajSalu.dodajSalu(naziv, sifra, brojSedista, brojRedova, sale);
 	}
 	
-	public void dodajFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, 
-			int godina2, int mesec2, int dan2) {
-		SODodajFilm.dodajFilm(naziv, zanr, trajanje, godina1, mesec1, dan1, godina2, mesec2, dan2, getFilmovi());
+	public void dodajFilm(Film film) {
+		SODodajFilm.dodajFilm(film, filmovi);
 	}
 	public LinkedList<String> vratiSveFilmove() {
 		return(SOVratiSveFilmove.vratiSveFilmove(getFilmovi()));
@@ -92,6 +91,10 @@ public class Raspored implements RasporedInterface{
 
 	public void setFilmovi(LinkedList<Film> filmovi) {
 		this.filmovi = filmovi;
+	}
+	
+	public LinkedList<Sala> vratiSale() {
+		return sale;
 	}
 }
 

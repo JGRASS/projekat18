@@ -15,8 +15,8 @@ public interface RasporedInterface {
 	public LinkedList<String> vratiFilmove();
 	public LinkedList<String> vratiDatume();
 	public void dodajSalu(String naziv, int sifra, int brojSedista, int brojRedova);
-	public void dodajFilm(String naziv, String zanr, int trajanje, int godina1, int mesec1, int dan1, 
-			int godina2, int mesec2, int dan2);
+	public void dodajFilm(Film film);
 	public LinkedList<String> vratiSveFilmove();
 	public LinkedList<String> vratiSveSale();
+	public LinkedList<Sala> vratiSale();
 }

@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import rs.fon.pp.dodatna.bioskop.Raspored;
+import rs.fon.pp.dodatna.bioskop.Sala;
 
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
