@@ -218,6 +218,13 @@ public class BioskopGUI extends JFrame {
 			mntmOtvori.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
+					String s = new String();
+					for (int i = 0; i < bioskop.vratiSveProjekcijeString().size(); i++) {
+						s = s+ bioskop.vratiSveProjekcijeString().get(i) +"\n";
+						
+					}
+					textArea.setText(s);
+					
 				}
 			});
 		}

@@ -14,6 +14,7 @@ import rs.fon.pp.dodatna.sistemskeoperacije.SOUcitajIzFajla;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiDatume;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiFilmove;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveFilmove;
+import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveProjekcije;
 import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveSale;
 
 
@@ -75,6 +76,11 @@ public class Raspored implements RasporedInterface{
 	}
 	public LinkedList<Film> vratiFilmove() {
 		return filmovi;
+	}
+
+	@Override
+	public LinkedList<String> vratiSveProjekcijeString() {
+		return(SOVratiSveProjekcije.vratiSveProjekcije(projekcije));
 	}
 }
 

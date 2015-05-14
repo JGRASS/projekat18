@@ -33,6 +33,8 @@ public class SOUcitajIzFajla {
 			sale.addAll(sale1);
 			
 			
+			
+			
 			in.close();
 		}catch(Exception e){
 			throw new RuntimeException(e);

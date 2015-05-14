@@ -2,6 +2,7 @@ package rs.fon.pp.dodatna.gui;
 
 import java.awt.EventQueue;
 import java.io.File;
+import java.util.LinkedList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -43,8 +44,11 @@ public class GUIKontroler {
 				"Izađi iz aplikacije", "Izlazak",
 				JOptionPane.YES_NO_CANCEL_OPTION);
 
-		if (opcija == JOptionPane.YES_OPTION)
+		if (opcija == JOptionPane.YES_OPTION){
 			System.exit(0);
+		}
+		
+		
 	}
 	
 	public static void prikaziRezervisiGUI() {
@@ -52,7 +56,9 @@ public class GUIKontroler {
 		prozor.setLocationRelativeTo(glavniProzor.getContentPane());
 		prozor.setVisible(true); 
 		prozor.izlistajFilmove(bioskop.vratiFilmoveString());
-		prozor.izlistajProjekcije(bioskop.pronadjiProjekcijeFilmDatum(prozor.vratiFilm(), prozor.vratiDatum()));
+		prozor.izlistajProjekcije(bioskop.vratiSveProjekcijeString());
+		
+		
 	}
 	
 	public static void prikaziIzaberiSedisteGUI(Projekcija projekcij) {
@@ -89,15 +95,48 @@ public class GUIKontroler {
 			film.setDatumZavrsetka(godina2, mesec2, dan2);
 			bioskop.dodajFilm(film);
 			
-			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiFilmove().getLast().toString());
+			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiFilmove().getLast().toString() +"\n");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
 					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	public static void unesiProjekciju(int sifra, Film film, int godina, int mesec, int dan, int sat, int minuti,
-			Sala sala, boolean daLiJe3D, double cena) {
+	public static void unesiProjekciju(int sifra, String film, int godina, int mesec, int dan, int sat, int minuti,
+			String sala, boolean daLiJe3D, double cena) {
+		try {
+			Film film1 = new Film();
+			
+			for (int i = 0; i < bioskop.vratiFilmove().size(); i++) {
+				if (bioskop.vratiFilmove().get(i).getNaziv().equals(film)){
+					film1 = bioskop.vratiFilmove().get(i);
+				}
+				
+			}
+			
+			Sala sala1 = new Sala();
+			
+			for (int i = 0; i < bioskop.vratiSale().size(); i++) {
+				if (bioskop.vratiSale().get(i).getNaziv().equals(sala)){
+					sala1 = bioskop.vratiSale().get(i);
+				}
+			}
+			
+			
+			
+			Projekcija projekcija = new Projekcija();
+			projekcija.setCena(cena);
+			projekcija.setDaLiJe3D(daLiJe3D);
+			projekcija.setFilm(film1);
+			projekcija.setSala(sala1);
+			projekcija.setSifra(sifra);
+			projekcija.setDatumPrikazivanja(godina, mesec, dan, sat, minuti);
+			bioskop.dodajProjekciju(projekcija);
+			glavniProzor.textArea.setText("Uspešno je uneta projekcija - " + bioskop.vratiProjekcije().getLast().toString() +"\n");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
+					"Greška!", JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 	
@@ -111,11 +150,15 @@ public class GUIKontroler {
 			sala.setBrojKolona(brojKolona);
 			bioskop.dodajSalu(sala);
 			
-			glavniProzor.textArea.setText("Uspešno je unet - " + bioskop.vratiSale().getLast().toString());
+			glavniProzor.textArea.setText("Uspešno je uneta - " + bioskop.vratiSale().getLast().toString());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
 					"Greška!", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public static void rezervisi (){
+		
 	}
 	
 	
@@ -186,6 +229,8 @@ public class GUIKontroler {
 		dodajSaluProzor.setVisible(true);
 		
 	}
+
+	
 	
 	//prozor.izlistajFilmove(bioskop.vratiFilmove());
 	//prozor.izlistajDatume(bioskop.vratiDatume());

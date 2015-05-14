@@ -23,5 +23,9 @@ public interface RasporedInterface {
 	
 	public LinkedList<String> vratiSveFilmoveString();
 	public LinkedList<String> vratiSveSaleString();
+	
+	public LinkedList<String> vratiSveProjekcijeString();
+	
+	
 
 }

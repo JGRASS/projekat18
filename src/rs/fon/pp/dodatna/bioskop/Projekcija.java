@@ -159,8 +159,8 @@ public class Projekcija implements Serializable{
 	 * iskljucivo true ili false
 	 */
 	public void setDaLiJe3D(boolean daLiJe3D) {
-		if(daLiJe3D != true || daLiJe3D != false)
-			throw new RuntimeException("Greška.");
+	//	if(daLiJe3D != true || daLiJe3D != false)
+		//	throw new RuntimeException("Greška.");
 		this.daLiJe3D = daLiJe3D;
 	}
 	

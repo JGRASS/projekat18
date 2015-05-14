@@ -15,14 +15,18 @@ import rs.fon.pp.dodatna.bioskop.Film;
 import rs.fon.pp.dodatna.bioskop.Projekcija;
 import rs.fon.pp.dodatna.bioskop.Raspored;
 import rs.fon.pp.dodatna.bioskop.RasporedInterface;
+import rs.fon.pp.dodatna.sistemskeoperacije.SOVratiSveFilmove;
 
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -51,7 +55,7 @@ public class RezervisiGUI extends JFrame {
 	
 	public RezervisiGUI(BioskopGUI glavniProzor) {
 		setTitle("Rezervi\u0161i");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 515, 364);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -142,6 +146,7 @@ public class RezervisiGUI extends JFrame {
 	private JComboBox<String> getComboBox_1() {
 		if (comboBox_1 == null) {
 			comboBox_1 = new JComboBox<String>();
+			comboBox_1.setModel(new DefaultComboBoxModel());
 			comboBox_1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		comboBox_1.setBounds(330, 26, 122, 30);
 
@@ -179,7 +184,7 @@ public class RezervisiGUI extends JFrame {
 		}
 	}
 	
-	protected void izlistajProjekcije(LinkedList<Projekcija> izabrane) {
+	protected void izlistajProjekcije(LinkedList<String> izabrane) {
 		for (int i = 0; i < izabrane.size(); i++) {
 			comboBox.addItem(izabrane.get(i).toString());
 		}
